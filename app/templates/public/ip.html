@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<br>
+<div class="container-fluid">
+        <div class="card-deck mb-3 text-center">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+              <h4 class="my-0 font-weight-normal"> IP Máquinas - {{hospital}}</h4>
+            </div>
+            <div class="card-body">
+                <table id="ipTable" class="table-responsive-lg" style="width:100%" style="background-color: rgb(26, 20, 80);">
+                    <thead>
+                        <tr>
+                            <th>UR</th>
+                            <th>IP</th>
+                            <th>Hospital</th>
+                            <th>Local</th>
+                            <th>Setor</th>
+                            <th>Ramal</th>
+                            <th>
+                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-arrow-clockwise" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M3.17 6.706a5 5 0 0 1 7.103-3.16.5.5 0 1 0 .454-.892A6 6 0 1 0 13.455 5.5a.5.5 0 0 0-.91.417 5 5 0 1 1-9.375.789z"/>
+                                    <path fill-rule="evenodd" d="M8.147.146a.5.5 0 0 1 .707 0l2.5 2.5a.5.5 0 0 1 0 .708l-2.5 2.5a.5.5 0 1 1-.707-.708L10.293 3 8.147.854a.5.5 0 0 1 0-.708z"/>
+                                </svg>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                <!-- Método para enviar os dados do banco para o html -->
+                            {% for dado in dados %}
+                                                <tr>
+                                                    <td>{{dado["ur"]}}</td>
+                                                    <td>{{dado["ip"]}}</td>
+                                                    <td>{{dado["hospital"]}}</td>
+                                                    <td>{{dado["local"]}}</td>
+                                                    <td>{{dado["setor"]}}</td>
+                                                    <td>{{dado["ramal"]}}</td>
+                                                    <td><button class="btn btn-sm btn-success btn-block" type="submit">Atualizar</button></td>
+                                                </tr>
+                            {% endfor %}
+                </table>
+            </div>
+          </div>
+    
+</div>
+
+
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    $(document).ready(function() {
+      $('#ipTable').DataTable({
+                              "language" : {
+                                              "sProcessing":   "A processar...",
+                                              "sLengthMenu":   "Mostrar _MENU_ registos",
+                                              "sZeroRecords":  "Não foram encontrados resultados",
+                                              "sInfo":         "Resultado(s) _START_ a _END_ de um total de _TOTAL_.",
+                                              "sInfoEmpty":    "Mostrando de 0 até 0 de 0 registos",
+                                              "sInfoFiltered": "(filtrado de _MAX_ registos no total)",
+                                              "sInfoPostFix":  "",
+                                              "sSearch":       "Procurar:",
+                                              "sUrl":          "",
+                                              "oPaginate": {
+                                                  "sFirst":    "Primeiro",
+                                                  "sPrevious": "Anterior",
+                                                  "sNext":     "Seguinte",
+                                                  "sLast":     "Último"
+                                              }
+                                          },
+                                  responsive: true,
+                              // Retirada da visualização da quantidade dos itens por página.
+                              "bLengthChange": false,
+                              // Define o tamanho de registros a serem filtrados, o primeiro é o default, no caso o "5".
+                              "lengthMenu": [5, 10, 25, 50, 75, 100 ]
+                          });
+                      });
+  </script>
+<script>
+    console.log("saindo do block optional")
+</script>
+
+{% endblock %}

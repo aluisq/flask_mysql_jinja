@@ -50,3 +50,40 @@ def ip_anexo_hur1():
 
     # print(dados)
     return render_template('public/ip.html', dados = dados, hospital = hospital) 
+
+@app.route("/search-ip/raspberry-hur1")
+def ip_rasp_hur1():
+
+    sql = ("SELECT ip, hospital, local, setor FROM raspberry WHERE hospital = 'HUR 1' ")
+    cursor.execute(sql)
+    dados = []
+    hospital = "HUR 1"
+
+    for (ip, hospital, local, setor) in cursor:
+        dados.append({"ip":ip, "hospital": hospital, "local": local, "setor": setor})
+    
+    return render_template("/public/raspberry.html", dados = dados, hospital = hospital)
+
+@app.route("/search-ip/raspberry-hgmi")
+def ip_rasp_hgmi():
+    sql = ("SELECT ip, hospital, local, setor FROM raspberry WHERE hospital = 'HGMI' ")
+    cursor.execute(sql)
+    dados = []
+    hospital = "HGMI"
+
+    for (ip, hospital, local, setor) in cursor:
+        dados.append({"ip":ip, "hospital": hospital, "local": local, "setor": setor})
+    
+    return render_template("/public/raspberry.html", dados = dados, hospital = hospital)
+
+@app.route("/search-ip/raspberry-anexo")
+def ip_rasp_anexo():
+    sql = ("SELECT ip, hospital, local, setor FROM raspberry WHERE hospital = 'ANEXO' ")
+    cursor.execute(sql)
+    dados = []
+    hospital = "ANEXO"
+
+    for (ip, hospital, local, setor) in cursor:
+        dados.append({"ip":ip, "hospital": hospital, "local": local, "setor": setor})
+    
+    return render_template("/public/raspberry.html", dados = dados, hospital = hospital)

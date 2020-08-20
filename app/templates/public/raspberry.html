@@ -1,24 +1,24 @@
 {% extends "layout.html" %}
 
+
 {% block body %}
+
 
 <br>
 <div class="container-fluid">
         <div class="card-deck mb-3 text-center">
           <div class="card mb-4 shadow-sm">
             <div class="card-header">
-              <h4 class="my-0 font-weight-normal"> IP Máquinas - {{hospital}}</h4>
+              <h4 class="my-0 font-weight-normal"> IP Raspberry - {{hospital}}</h4>
             </div>
             <div class="card-body">
                 <table id="ipTable" class="table-responsive-lg" style="width:100%" style="background-color: rgb(26, 20, 80);">
                     <thead>
                         <tr>
-                            <th>UR</th>
                             <th>IP</th>
                             <th>Hospital</th>
                             <th>Local</th>
                             <th>Setor</th>
-                            <th>Ramal</th>
                             <th>
                                 <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-arrow-clockwise" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M3.17 6.706a5 5 0 0 1 7.103-3.16.5.5 0 1 0 .454-.892A6 6 0 1 0 13.455 5.5a.5.5 0 0 0-.91.417 5 5 0 1 1-9.375.789z"/>
@@ -31,12 +31,10 @@
                 <!-- Método para enviar os dados do banco para o html -->
                             {% for dado in dados %}
                                                 <tr>
-                                                    <td>{{dado["ur"]}}</td>
                                                     <td>{{dado["ip"]}}</td>
                                                     <td>{{dado["hospital"]}}</td>
                                                     <td>{{dado["local"]}}</td>
                                                     <td>{{dado["setor"]}}</td>
-                                                    <td>{{dado["ramal"]}}</td>
                                                     <td>
                                                         <!-- Button trigger modal -->
                                                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
@@ -71,9 +69,6 @@
           </div>
     
 </div>
-
-
-
 {% endblock %}
 
 {% block scripts %}

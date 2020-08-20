@@ -26,8 +26,7 @@ bootstrap = Bootstrap(app)
 
 #  Registra as Views
 
-from app.views import search_ip
-from app.views import links
+from app.views import search_ip, links, doc
 
 # # MOSTRA TODOS OS PARÂMETROS DO FLASK
 # print(app.config)

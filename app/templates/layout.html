@@ -36,9 +36,9 @@
                         <div class="dropdown">
                             <a class="nav-item btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Raspberry<span class="sr-only">(current)</span></a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                              <a class="dropdown-item" href="#">HUR 1</a>
-                              <a class="dropdown-item" href="#">ANEXO</a>
-                              <a class="dropdown-item" href="#">HGMI</a>
+                              <a class="dropdown-item" href="{{ url_for('ip_rasp_hur1')}}">HUR 1</a>
+                              <a class="dropdown-item" href="{{url_for('ip_rasp_anexo')}}">ANEXO</a>
+                              <a class="dropdown-item" href="{{ url_for('ip_rasp_hgmi')}}">HGMI</a>
                             </div>
                           </div>
                     </li>
@@ -46,7 +46,7 @@
                         <a class="nav-link" href="{{ url_for('links') }}">Link dos Painéis</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('index') }}">Documentos</a>
+                        <a class="nav-link" href="{{ url_for('doc') }}">Documentos</a>
                     </li>
                 </ul>
                 

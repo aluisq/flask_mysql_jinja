@@ -7,3 +7,8 @@ footer {
     color: white;
     text-align: center;
 }
+#sidebarMenu {
+    padding-right: 20px;
+    padding-top: 20px;
+    min-height: calc(100vh - 50px);
+}

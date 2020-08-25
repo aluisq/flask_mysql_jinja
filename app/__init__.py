@@ -2,12 +2,13 @@ from flask import Flask
 import mysql.connector
 from mysql.connector import Error
 from flask_bootstrap import Bootstrap
+import os
 
 try:
-    connection = mysql.connector.connect(host='localhost',
-                                         database='magic_flask',
-                                         user='arthurti',
-                                         password='flask')
+    connection = mysql.connector.connect(host= os.getenv("HOST"),
+                                         database= os.getenv("DATABASE"),
+                                         user= os.getenv("USER"),
+                                         password= os.getenv("PASSWORD"))
     if connection.is_connected():
         db_Info = connection.get_server_info()
         print("Connected to MySQL Server version ", db_Info)
@@ -15,7 +16,6 @@ try:
 
 except Error as e:
     print("Error while connecting to MySQL", e)
-
 
 # Registra as intâncias na aplicação
 

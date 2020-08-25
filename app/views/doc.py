@@ -7,4 +7,4 @@ def doc():
 
 @app.route('/doc/teste')
 def doc_pdf():
-    return send_file('static/pdf/teste.pdf')
+    return send_file('static/doc/teste.pdf')

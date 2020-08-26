@@ -4,10 +4,6 @@ from flask import render_template, request, redirect, url_for
 # Mostra os resultados
 # print(dados)
 
-@app.route("/")
-def index():
-    return render_template('public/home.html')
-
 @app.route("/search-ip/hgmi")
 def ip_hgmi():
 

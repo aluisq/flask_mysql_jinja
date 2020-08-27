@@ -12,3 +12,7 @@ footer {
     padding-top: 20px;
     min-height: calc(100vh - 50px);
 }
+
+.navFirst {
+    margin-right: 15px;
+}

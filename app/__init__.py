@@ -23,7 +23,6 @@ app = Flask(__name__)
 
 bootstrap = Bootstrap(app)
 
-
 #  Registra as Views
 
 from app.views import search_ip, links, doc, dashboard, index

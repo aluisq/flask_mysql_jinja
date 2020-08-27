@@ -16,6 +16,7 @@
                     <thead>
                         <tr>
                             <th>IP</th>
+                            <th>Hostname</th>
                             <th>Hospital</th>
                             <th>Local</th>
                             <th>Setor</th>
@@ -39,6 +40,7 @@
                             {% for dado in dados %}
                                                 <tr>
                                                     <td>{{dado["ip"]}}</td>
+                                                    <td>{{dado["hostname"]}}</td>
                                                     <td>{{dado["hospital"]}}</td>
                                                     <td>{{dado["local"]}}</td>
                                                     <td>{{dado["setor"]}}</td>
@@ -53,7 +55,7 @@
                                                           <div class="modal-dialog">
                                                             <div class="modal-content">
                                                               <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">IP ATUAL: {{dado['ip']}}</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Hostname: {{dado['hostname']}}</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                   <span aria-hidden="true">&times;</span>
                                                                 </button>

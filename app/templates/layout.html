@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="{{url_for('static',filename='css/datatables.css')}}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
          <!-- development version, includes helpful console warnings -->
-         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <title>RockeTI - Unimed</title>
         {% block head %}{% endblock %}
     </head>
@@ -26,7 +26,7 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <div class="dropdown">
-                            <a class="nav-item navFirst btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Consulta IP <span class="sr-only">(current)</span></a>
+                            <a class="nav-item navFirst btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Máquinas<span class="sr-only">(current)</span></a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                               <a class="dropdown-item" href="{{ url_for('ip_hur1') }}">HUR 1</a>
                               <a class="dropdown-item" href="{{url_for('ip_anexo_hur1')}}">ANEXO</a>
@@ -57,25 +57,44 @@
                 
             </div>
         </nav>
-        <br>
-        <br>
             <div class="container-fluid">
                 <div class="row">
-                    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse ">
                         <div class="sidebar-sticky pt-3">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
                                     <a class="nav-link active" href="{{url_for('dashboard')}}">
-                                        <i class="fa fa-desktop fa-2x" aria-hidden="true"></i>
+                                        <i class="fa fa-line-chart fa-2x" aria-hidden="true"></i>
                                         <span data-feather="home"></span>
                                         Dashboard <span class="sr-only">(current)</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{url_for('index')}}">
-                                        <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+                                    <a class="nav-link active" href="{{url_for('new_ip')}}">
+                                        <i class="fa fa-desktop fa-2x" aria-hidden="true"></i>
+                                        <span data-feather="home"></span>
+                                        Cadastro<span class="sr-only">(current)</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url_for('qr_code')}}">
+                                        <i class="fa fa-qrcode fa-2x" aria-hidden="true"></i>
                                         <span data-feather="file"></span>
-                                        Usuários
+                                        Qr Code
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" target="_blank" href="http://helpdesk.unimedrecife.com.br/glpi/index.php">
+                                        <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
+                                        <span data-feather="file"></span>
+                                        GLPI
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" target="_blank" href="https://cardapio-hgmi.unimedrecife.com.br/painel-cardapio/">
+                                        <i class="fa fa-cutlery fa-2x" aria-hidden="true"></i>
+                                        <span data-feather="file"></span>
+                                        Cardápio
                                     </a>
                                 </li>
                             </ul>
@@ -89,6 +108,12 @@
                            
                             {% endblock %}
                         </div>
+
+                        {% block content %}
+
+                        {%endblock%}
+
+
         <!-- JavaScript BOOTSTRAP: ON -->
         {{ bootstrap.load_js() }}
 

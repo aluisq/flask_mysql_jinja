@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block body %}
+{% block content %}
 
 <br>
 <div class="container-fluid">
@@ -15,6 +15,7 @@
                         <tr>
                             <th>UR</th>
                             <th>IP</th>
+                            <th>Hostname</th> 
                             <th>Hospital</th>
                             <th>Local</th>
                             <th>Setor</th>
@@ -41,6 +42,7 @@
                                                 <tr>
                                                     <td>{{dado["ur"]}}</td>
                                                     <td>{{dado["ip"]}}</td>
+                                                    <td>{{dado["hostname"]}}</td>
                                                     <td>{{dado["hospital"]}}</td>
                                                     <td>{{dado["local"]}}</td>
                                                     <td>{{dado["setor"]}}</td>
@@ -55,7 +57,7 @@
                                                           <div class="modal-dialog">
                                                             <div class="modal-content">
                                                               <div class="modal-header">
-                                                                <h5 class="modal-title" id="ipModalLabel">UR: {{dado['ur']}}</h5>
+                                                                <h5 class="modal-title" id="ipModalLabel">Hostname: {{dado['hostname']}}</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                   <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -84,15 +86,15 @@
                                                           <div class="modal-dialog">
                                                             <div class="modal-content">
                                                               <div class="modal-header">
-                                                                <h5 class="modal-title" id="ipModalLabel">Deseja excluir esse IP?</h5>
+                                                                <h5 class="modal-title" id="ipModalLabel">Deseja excluir essa máquina??</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                   <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                               </div>
                                                               <div class="modal-body">
                                                                 <form action="" method="post">
-                                                                  <label for="deleteIp">IP:</label>
-                                                                  <input type="text" readonly name="deleteIp" value="{{dado['ip']}}" >
+                                                                  <label for="deleteIp">Hostname:</label>
+                                                                  <input type="text" readonly name="deleteIp" value="{{dado['hostname']}}" >
                                                                 </form>
                                                               </div>
                                                               <div class="modal-footer">
@@ -109,8 +111,6 @@
             </div>
           </div>
 </div>
-
-
 
 {% endblock %}
 

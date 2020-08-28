@@ -10,8 +10,6 @@
         <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
         <link rel="stylesheet" href="{{url_for('static',filename='css/datatables.css')}}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-         <!-- development version, includes helpful console warnings -->
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <title>RockeTI - Unimed</title>
         {% block head %}{% endblock %}
     </head>
@@ -103,26 +101,30 @@
 
                     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom div-top-dashboard">
-                             <!-- Your page body -->
-                            {% block body %}
-                           
-                            {% endblock %}
+                             <!-- Conteúdo -->
+                             {% block content %}
+
+                             {%endblock%}
                         </div>
 
-                        {% block content %}
-
-                        {%endblock%}
+                        
+                        <!-- Acréscimo de conteúdo -->
+                        {% block body %}
+                           
+                        {% endblock %}
 
 
         <!-- JavaScript BOOTSTRAP: ON -->
         {{ bootstrap.load_js() }}
 
+        <!-- JavaScript do DataTable -->
         <script src="{{ url_for('static',filename='js/datatables.js')}}"></script>
        
         <!-- Optional JavaScript -->
-        {% block scripts %}
-        {% endblock %}
+        {% block scripts %}{% endblock %}
         <!-- Optional JavaScript - FIM -->
+
+        
             <!-- Footer -->
             <footer class="page-footer font-small blue">
                 <!-- Copyright -->

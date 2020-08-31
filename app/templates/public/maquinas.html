@@ -57,16 +57,27 @@
                                                           <div class="modal-dialog">
                                                             <div class="modal-content">
                                                               <div class="modal-header">
-                                                                <h5 class="modal-title" id="ipModalLabel">Hostname: {{dado['hostname']}}</h5>
+                                                                <h5 class="modal-title" id="ipModalLabel">Atualização | Hostname: {{dado['hostname']}}</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                   <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                               </div>
                                                               <div class="modal-body">
-                                                                <form action="" method="post">
-                                                                  <label for="">Novo IP:</label>
-                                                                  <input type="text" name="">
-                                                                </form>
+                                                                <div class="container-fluid">
+                                                                  <form action="" method="post">
+                                                                    <label for="">UR:</label>
+                                                                    <input type="text" name="" value="{{dado['ur']}}">
+                                                                    <label for="">Novo IP:</label>
+                                                                    <input type="text" name="" value="{{dado['ip']}}">
+                                                                    <label for="">Novo Local:</label>
+                                                                    <input type="text" name="" value="{{dado['local']}}">
+                                                                    <label for="">Novo Setor:</label>
+                                                                    <input type="text" name="" value="{{dado['setor']}}">
+                                                                    <label for="">Novo Ramal:</label>
+                                                                    <input type="text" name="" value="{{dado['ramal']}}">
+                                                                  </form>
+                                                                </div>
+                                                                
                                                               </div>
                                                               <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

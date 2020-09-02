@@ -1,5 +1,5 @@
 from app import cursor, app
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, jsonify
 
 # Mostra os resultados
 # print(dados)
@@ -71,14 +71,22 @@ def ip_rasp_hgmi():
     
     return render_template("/public/raspberry.html", dados = dados, hospital = hospital)
 
-@app.route("/search-ip/raspberry-anexo")
+@app.route("/search-ip/raspberry-anexo", methods=['GET','POST'])
 def ip_rasp_anexo():
-    sql = ("SELECT id, ip, hostname, hospital, local, setor FROM raspberry WHERE hospital = 'ANEXO' ")
-    cursor.execute(sql)
-    dados = []
-    hospital = "ANEXO"
+    if request.method == 'POST':
 
-    for (id, ip, hostname, hospital, local, setor) in cursor:
-        dados.append({"id":id, "ip":ip, "hostname": hostname, "hospital": hospital, "local": local, "setor": setor})
-    
-    return render_template("/public/raspberry.html", dados = dados, hospital = hospital)
+        json = {'Status': 'MÉTODO POST ATIVO: RASPBERRY EXCLUÍDO'}
+        return jsonify(json)
+        
+
+    else:
+        request.method == 'GET'
+        sql = ("SELECT id, ip, hostname, hospital, local, setor FROM raspberry WHERE hospital = 'ANEXO' ")
+        cursor.execute(sql)
+        dados = []
+        hospital = "ANEXO"
+
+        for (id, ip, hostname, hospital, local, setor) in cursor:
+            dados.append({"id":id, "ip":ip, "hostname": hostname, "hospital": hospital, "local": local, "setor": setor})
+        
+        return render_template("/public/raspberry.html", dados = dados, hospital = hospital)

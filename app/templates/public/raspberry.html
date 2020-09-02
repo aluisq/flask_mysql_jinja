@@ -90,15 +90,15 @@
                                                                 </button>
                                                               </div>
                                                               <div class="modal-body">
-                                                                <form action="" method="post">
+                                                                <form action="{{url_for('ip_rasp_anexo')}}" method="post">
                                                                   <label for="deleteIp">IP:</label>
                                                                   <input type="text" readonly name="deleteIp" value="{{dado['ip']}}" >
-                                                                </form>
                                                               </div>
                                                               <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                                <button type="button" class="btn btn-success">Confirmar</button>
+                                                                <button type="submit" class="btn btn-success">Confirmar</button>
                                                               </div>
+                                                            </form>
                                                             </div>
                                                           </div>
                                                         </div>

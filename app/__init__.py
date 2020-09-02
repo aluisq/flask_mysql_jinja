@@ -9,9 +9,10 @@ try:
                                          database= os.getenv("DATABASE"),
                                          user= os.getenv("USER"),
                                          password= os.getenv("PASSWORD"))
+
     if connection.is_connected():
         db_Info = connection.get_server_info()
-        print("Connected to MySQL Server version ", db_Info)
+        print("Connected to MySQL Server version", db_Info)
         cursor = connection.cursor()
 
 except Error as e:

@@ -84,15 +84,16 @@
                                                           <div class="modal-dialog">
                                                             <div class="modal-content">
                                                               <div class="modal-header">
-                                                                <h5 class="modal-title" id="ipModalLabel">Deseja excluir esse IP?</h5>
+                                                                <h5 class="modal-title" id="ipModalLabel">Deseja excluir esse Raspberry?</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                   <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                               </div>
                                                               <div class="modal-body">
-                                                                <form action="{{url_for('ip_rasp_anexo')}}" method="post">
-                                                                  <label for="deleteIp">IP:</label>
-                                                                  <input type="text" readonly name="deleteIp" value="{{dado['ip']}}" >
+                                                                <form action="{{url_for('delete_ip_raspberry')}}" method="post">
+                                                                  <input type="hidden" name="name_hospital" value="{{hospital}}">
+                                                                  <label for="deleteIp">Hostname:</label>
+                                                                  <input type="text" readonly name="hostname" value="{{dado['hostname']}}" >
                                                               </div>
                                                               <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

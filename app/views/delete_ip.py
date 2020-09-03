@@ -1,18 +1,53 @@
-# from app import cursor, app
-# from flask import render_template, request, redirect, url_for
+from app import cursor, app
+from flask import render_template, request, redirect, url_for, jsonify
 
-# @app.route("/delete-ip/hur1")
+@app.route("/delete-ip-raspberry/", methods=['GET','POST'])
+def delete_ip_raspberry():   
+    
+    if request.method == 'POST':
+        hospital = request.form['name_hospital']
+        hostname = request.form['hostname']
+
+        json = {'Status':f'MÉTODO POST ATIVO: RASPBERRY EXCLUÍDO: HOSTNAME: {hostname} -> {hospital}'}
+        return jsonify(json)
+
+    else:
+        request.method == 'GET'
+        return redirect(url_for('index'))
+
+
+
+
+# @app.route("/delete-ip/hur1", methods=['POST'])
+# def delete_ip_hur1():
+    
+
+#     hospital = request.form['name_hospital']
+
+#     print(hospital)
+
+#     json = {'Status':'MÉTODO POST ATIVO: RASPBERRY EXCLUÍDO -> HUR1'}
+#     return jsonify(json)
+
+# @app.route("/delete-ip/anexo", methods=['POST'])
+# def delete_ip_anexo():
+    
+
+#     hospital = request.form['name_hospital']
+
+#     print(hospital)
+
+#     json = {'Status':'MÉTODO POST ATIVO: RASPBERRY EXCLUÍDO -> ANEXO'}
+#     return jsonify(json)
+
+
+# @app.route("/delete-ip/hgmi", methods=['POST'])
 # def delete_ip_hgmi():
+    
 
-#     ip = request.form['ipNumber']
+#     hospital = request.form['name_hospital']
 
-#     sql = ("SELECT ur, ip, hospital, local, setor, ramal FROM maquinas WHERE hospital = 'HGMI' ")
-#     cursor.execute(sql)
-#     dados = []
-#     hospital = "HGMI"
+#     print(hospital)
 
-#     for (ur, ip, hospital, local, setor, ramal) in cursor:
-#         dados.append({"ur": ur, "ip": ip, "hospital" : hospital, "local": local, "setor": setor, "ramal": ramal })
-
-#     # print(dados)
-#     return render_template('public/ip.html', dados = dados, hospital = hospital)
+#     json = {'Status':'MÉTODO POST ATIVO: RASPBERRY EXCLUÍDO -> HGMI'}
+#     return jsonify(json)

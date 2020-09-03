@@ -71,16 +71,8 @@ def ip_rasp_hgmi():
     
     return render_template("/public/raspberry.html", dados = dados, hospital = hospital)
 
-@app.route("/search-ip/raspberry-anexo", methods=['GET','POST'])
+@app.route("/search-ip/raspberry-anexo")
 def ip_rasp_anexo():
-    if request.method == 'POST':
-
-        json = {'Status': 'MÉTODO POST ATIVO: RASPBERRY EXCLUÍDO'}
-        return jsonify(json)
-        
-
-    else:
-        request.method == 'GET'
         sql = ("SELECT id, ip, hostname, hospital, local, setor FROM raspberry WHERE hospital = 'ANEXO' ")
         cursor.execute(sql)
         dados = []

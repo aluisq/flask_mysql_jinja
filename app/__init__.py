@@ -31,4 +31,4 @@ bootstrap = Bootstrap(app)
 from app.views import search_ip, delete_ip, links, doc, dashboard, index, new_ip, qr_code, tutorials
 
 # # MOSTRA TODOS OS PARÂMETROS DO FLASK
-print(app.config['SECRET_KEY'])
+# print(app.config['SECRET_KEY'])

@@ -8,7 +8,7 @@ from pygal.style import LightGreenStyle
 def dashboard():
 
         ### Query para as Máquinas da aplicação
-        query_machine = ("SELECT COUNT(*) FROM maquinas")
+        query_machine = ("SELECT COUNT(*) FROM equipments WHERE raspberry LIKE 'N%' ")
 
         cursor.execute(query_machine)
 
@@ -21,7 +21,7 @@ def dashboard():
         
         ### Query para os Rasperry da aplicação
 
-        query_raspberry = ("SELECT COUNT(*) FROM raspberry")
+        query_raspberry = ("SELECT COUNT(*) FROM equipments WHERE raspberry LIKE 'S%' ")
 
         cursor.execute(query_raspberry)
 

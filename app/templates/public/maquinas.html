@@ -4,6 +4,16 @@
 
 <br>
 <div class="container-fluid">
+    <!-- Mensagem de aviso se for excluído um raspberry -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-warning" role="alert">
+              <h5>{{ message }}</h5>
+            </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
         <div class="card-deck mb-3 text-center">
           <div class="card mb-4 shadow-sm">
             <div class="card-header">
@@ -103,14 +113,16 @@
                                                                 </button>
                                                               </div>
                                                               <div class="modal-body">
-                                                                <form action="" method="post">
+                                                                <form action="{{url_for('delete_ip_machine')}}" method="post">
+                                                                  <input type="hidden" name="name_hospital" value="{{hospital}}">
                                                                   <label for="deleteIp">Hostname:</label>
-                                                                  <input type="text" readonly name="deleteIp" value="{{dado['hostname']}}" >
-                                                                </form>
+                                                                  <input type="text" readonly name="hostname" value="{{dado['hostname']}}" >
                                                               </div>
                                                               <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                                <button type="button" class="btn btn-success">Confirmar</button>
+                                                                <button type="submit" class="btn btn-success">Confirmar</button>
+                                                              </div>
+                                                            </form>
                                                               </div>
                                                             </div>
                                                           </div>

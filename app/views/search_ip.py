@@ -6,8 +6,8 @@ from flask import render_template, request, redirect, url_for, jsonify
 
 @app.route("/search-ip/hgmi")
 def ip_hgmi():
-
-    sql = ("SELECT ur, ip, hostname, hospital, local, setor, ramal FROM maquinas WHERE hospital = 'HGMI' ")
+    #QUERY ALTERADA PARA TESTE
+    sql = ("SELECT ur, ip, hostname, hospital, local, setor, ramal FROM equipments WHERE hospital = 'HGMI' AND raspberry LIKE 'N%' ")
     cursor.execute(sql)
     dados = []
     hospital = "HGMI"
@@ -21,7 +21,7 @@ def ip_hgmi():
 @app.route("/search-ip/hur1")
 def ip_hur1():
 
-    sql = ("SELECT ur, ip, hostname, hospital, local, setor, ramal FROM maquinas WHERE hospital = 'HUR 1' ")
+    sql = ("SELECT ur, ip, hostname, hospital, local, setor, ramal FROM equipments WHERE hospital = 'HUR 1' AND raspberry LIKE 'N%' ")
     cursor.execute(sql)
     dados = []
     hospital = "HUR 1"
@@ -35,7 +35,7 @@ def ip_hur1():
 @app.route("/search-ip/anexo-hur1")
 def ip_anexo_hur1():
 
-    sql = ("SELECT ur, ip, hostname, hospital, local, setor, ramal FROM maquinas WHERE hospital = 'ANEXO' ")
+    sql = ("SELECT ur, ip, hostname, hospital, local, setor, ramal FROM equipments WHERE hospital = 'ANEXO' AND raspberry LIKE 'N%' ")
     cursor.execute(sql)
     dados = []
     hospital = "ANEXO"
@@ -49,7 +49,7 @@ def ip_anexo_hur1():
 @app.route("/search-ip/raspberry-hur1")
 def ip_rasp_hur1():
 
-    sql = ("SELECT id, ip, hostname, hospital, local, setor FROM raspberry WHERE hospital = 'HUR 1' ")
+    sql = ("SELECT id, ip, hostname, hospital, local, setor FROM equipments WHERE hospital = 'HUR 1' AND raspberry LIKE 'S%'")
     cursor.execute(sql)
     dados = []
     hospital = "HUR 1"
@@ -61,7 +61,7 @@ def ip_rasp_hur1():
 
 @app.route("/search-ip/raspberry-hgmi")
 def ip_rasp_hgmi():
-    sql = ("SELECT id, ip, hostname, hospital, local, setor FROM raspberry WHERE hospital = 'HGMI' ")
+    sql = ("SELECT id, ip, hostname, hospital, local, setor FROM equipments WHERE hospital = 'HGMI' AND raspberry LIKE 'S%'")
     cursor.execute(sql)
     dados = []
     hospital = "HGMI"
@@ -73,7 +73,7 @@ def ip_rasp_hgmi():
 
 @app.route("/search-ip/raspberry-anexo")
 def ip_rasp_anexo():
-        sql = ("SELECT id, ip, hostname, hospital, local, setor FROM raspberry WHERE hospital = 'ANEXO' ")
+        sql = ("SELECT id, ip, hostname, hospital, local, setor FROM equipments WHERE hospital = 'ANEXO' AND raspberry LIKE 'S%'")
         cursor.execute(sql)
         dados = []
         hospital = "ANEXO"

@@ -60,44 +60,41 @@
                     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                         <div class="sidebar-sticky pt-3">
                             <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="{{url_for('dashboard')}}">
-                                        <i class="fa fa-line-chart fa-2x" aria-hidden="true"></i>
-                                        <span data-feather="home"></span>
-                                        Dashboard <span class="sr-only">(current)</span>
+                                <li class="nav-item row edge_distance">
+                                    <i class="fa fa-line-chart fa-2x" aria-hidden="true"></i>
+                                    <a class="nav-link" href="{{url_for('dashboard')}}">
+                                        <span style="font-size:16px" >Dashboard</span>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item row edge_distance">
+                                    <i class="fa fa-desktop fa-2x" aria-hidden="true"></i>
                                     <a class="nav-link active" href="{{url_for('new_hostname')}}">
-                                        <i class="fa fa-desktop fa-2x" aria-hidden="true"></i>
-                                        <span data-feather="home"></span>
-                                        Cadastro<span class="sr-only">(current)</span>
+                                        <span>Cadastro</span>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item row edge_distance">
+                                    <i class="fa fa-book fa-2x" aria-hidden="true"></i>
                                     <a class="nav-link" href="{{url_for('tutorials')}}">
-                                        <i class="fa fa-book fa-2x" aria-hidden="true"></i>
-                                        <span data-feather="file"></span>
-                                        Tutoriais
+                                        <span>Tutoriais</span>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item row edge_distance">
+                                    <i class="fa fa-qrcode fa-2x" aria-hidden="true"></i>
                                     <a class="nav-link" href="{{url_for('qr_code')}}">
-                                        <i class="fa fa-qrcode fa-2x" aria-hidden="true"></i>
                                         <span data-feather="file"></span>
                                         Qr Code
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item row edge_distance">
+                                    <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
                                     <a class="nav-link" target="_blank" href="http://helpdesk.unimedrecife.com.br/glpi/index.php">
-                                        <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
                                         <span data-feather="file"></span>
                                         GLPI
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item row edge_distance">
+                                    <i class="fa fa-cutlery fa-2x" aria-hidden="true"></i>
                                     <a class="nav-link" target="_blank" href="https://cardapio-hgmi.unimedrecife.com.br/painel-cardapio/">
-                                        <i class="fa fa-cutlery fa-2x" aria-hidden="true"></i>
                                         <span data-feather="file"></span>
                                         Cardápio
                                     </a>

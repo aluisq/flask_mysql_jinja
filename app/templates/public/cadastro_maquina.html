@@ -2,54 +2,61 @@
 
 
 {% block content %}
-
-
-<form action="" class="container-fluid">
-        <div class="text-center">
+        <div class="text-center container-fluid">
+          <!-- Mensagem de aviso se for excluído um raspberry -->
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{color}}" role="alert">
+                  <h5>{{ message }}</h5>
+                </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
           <div class="card mb-4 shadow-sm">
             <div class="card-header">
               <h3 class="my-0 font-weight-normal"> Cadastro de Máquina / Raspberry</h3>
             </div>
             <div class="card-body d-flex justify-content-center">
               <div class="col-md-8 order-md-1">
-                <form class="needs-validation" novalidate>
+                <form action="{{url_for('new_hostname')}}" method="post" class="container-fluid">
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="ur">Ur</label>
-                      <input type="text" class="form-control" name="ur" placeholder="Apenas para máquinas">
+                      <input type="text" class="form-control" name="ur" placeholder="">
                     </div>
                     <div class="col-md-6 mb-3">
-                      <label for="ip">Ip</label>
-                      <input type="text" class="form-control" name="ip" required>
+                      <label for="ip">Ip <span style="color: red;">*</span></label>
+                      <input type="text" class="form-control" name="ip" placeholder="Utilize os pontos para separar os números" required>
                     </div>
                   </div>
                   <div class="mb-3">
-                    <label for="hostname">Hostname</label>
+                    <label for="hostname">Hostname <span style="color: red;">*</span> </label>
                     <input type="text" class="form-control" name="hostname" required>
                   </div>
                   <div class="mb-3">
-                    <label for="local">Local</label>
-                    <input type="text" class="form-control" name="local" required>
+                    <label for="local">Local <span style="color: red;">*</span> </label>
+                    <input type="text" class="form-control" name="local" placeholder="Ex: 1° ANDAR" required>
                   </div>
                   <div class="mb-3">
-                    <label for="address2">Setor</label>
-                    <input type="text" class="form-control" name="setor">
+                    <label for="address2">Setor <span style="color: red;">*</span> </label>
+                    <input type="text" class="form-control" name="setor" placeholder="Ex: POSTO DE ENFERMAGEM, ESTAR MÉDICO" required>
                   </div>
                   <div class="row">
                     <div class="col-md-5 mb-3">
-                      <label for="unidade">Unidade</label>
+                      <label for="unidade">Unidade <span style="color: red;">*</span> </label>
                       <select class="custom-select d-block w-100" name="unidade" required>
-                        <option>.::Escolher::.</option>
+                        <option value="NULL" >.::Escolher::.</option>
                         <option value="HUR 1">HUR 1</option>
                         <option value="ANEXO">ANEXO</option>
                         <option value="HGMI">HGMI</option>
                       </select>
                     </div>
                     <div class="col-md-4 mb-3">
-                      <label for="equipamento">Tipo de Equipamento</label>
+                      <label for="equipamento">Tipo de Equipamento <span style="color: red;">*</span></label>
                       <select class="custom-select d-block w-100" name="equipamento" required>
-                        <option>.::Escolher::.</option>
-                        <option value="maquina" >Máquina</option>
+                        <option  value="NULL">.::Escolher::.</option>
+                        <option value="maquinas" >Máquina</option>
                         <option value="raspberry">Raspberry</option>
                       </select>
                     </div>
@@ -58,14 +65,13 @@
                       <input type="text" class="form-control" name="ramal">
                     </div>
                   </div>
-                  <span> 
-                    <a class="btn btn-primary btn-lg " href="{{url_for('doc_pdf_thunderbird')}}" role="button">Cadastrar</a>
-                  </span>
+                  <button type="submit" class="btn btn-lg btn-primary">Confirmar</button>
+                </form>
             </div>
             </div>
           </div>
         </div>
-</form>
+
 
 
 {% endblock %}

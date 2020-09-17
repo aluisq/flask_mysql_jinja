@@ -6,7 +6,7 @@ from flask import render_template, request, redirect, url_for, jsonify, flash
 def delete_ip_raspberry():   
     
     if request.method == 'POST':
-        hospital = str(request.form['name_hospital'])
+        unidade = str(request.form['name_unidade'])
         hostname = str(request.form['hostname'])
 
         try:
@@ -21,9 +21,9 @@ def delete_ip_raspberry():
 
             flash(f'Raspberry: {hostname} foi deletetado com sucesso!')
 
-            if hospital == 'HUR 1':
+            if unidade == 'HUR 1':
                 return redirect(url_for('ip_rasp_hur1'))
-            elif hospital == 'HGMI' :
+            elif unidade == 'HGMI' :
                 return redirect(url_for('ip_rasp_hgmi'))
             else:
                 return redirect(url_for('ip_rasp_anexo'))
@@ -42,7 +42,7 @@ def delete_ip_raspberry():
 def delete_ip_machine():   
     
     if request.method == 'POST':
-        hospital = str(request.form['name_hospital'])
+        unidade = str(request.form['name_unidade'])
         hostname = str(request.form['hostname'])
         
         try:
@@ -57,9 +57,9 @@ def delete_ip_machine():
 
             flash(f'Raspberry: {hostname} foi deletetado com sucesso!')
 
-            if hospital == 'HUR 1':
+            if unidade == 'HUR 1':
                 return redirect(url_for('ip_hur1'))
-            elif hospital == 'HGMI' :
+            elif unidade == 'HGMI' :
                 return redirect(url_for('ip_hgmi'))
             else:
                 return redirect(url_for('ip_anexo_hur1'))

@@ -18,7 +18,7 @@
         <div class="card-deck mb-3 text-center">
           <div class="card mb-4 shadow-sm">
             <div class="card-header">
-              <h4 class="my-0 font-weight-normal"> IP Raspberry - {{hospital}}</h4>
+              <h4 class="my-0 font-weight-normal"> IP Raspberry - {{unidade}}</h4>
             </div>
             <div class="card-body">
            
@@ -27,7 +27,7 @@
                         <tr>
                             <th>IP</th>
                             <th>Hostname</th>
-                            <th>Hospital</th>
+                            <th>Unidade</th>
                             <th>Local</th>
                             <th>Setor</th>
                             <th>
@@ -51,7 +51,7 @@
                                                 <tr>
                                                     <td>{{dado["ip"]}}</td>
                                                     <td>{{dado["hostname"]}}</td>
-                                                    <td>{{dado["hospital"]}}</td>
+                                                    <td>{{dado["unidade"]}}</td>
                                                     <td>{{dado["local"]}}</td>
                                                     <td>{{dado["setor"]}}</td>
                                                     <td>
@@ -101,7 +101,7 @@
                                                               </div>
                                                               <div class="modal-body">
                                                                 <form action="{{url_for('delete_ip_raspberry')}}" method="post">
-                                                                  <input type="hidden" name="name_hospital" value="{{hospital}}">
+                                                                  <input type="hidden" name="name_unidade" value="{{unidade}}">
                                                                   <label for="deleteIp">Hostname:</label>
                                                                   <input type="text" readonly name="hostname" value="{{dado['hostname']}}" >
                                                               </div>

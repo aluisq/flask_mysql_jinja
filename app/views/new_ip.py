@@ -1,5 +1,6 @@
 from app import cursor, app
 from flask import render_template, request, redirect, url_for, jsonify, flash
+from mysql.connector import Error
 
 @app.route("/new-hostname/", methods=["GET","POST"])
 def new_hostname():
@@ -9,54 +10,47 @@ def new_hostname():
         request.method == 'POST'
         ur = request.form["ur"]
         ip = request.form["ip"]
-        hostname =  request.form["hostname"]
-        local = request.form["local"]
-        setor = request.form["setor"]
+        hostname =  request.form["hostname"].upper()
+        local = request.form["local"].upper()
+        setor = request.form["setor"].upper()
         unidade = request.form["unidade"]
         tipo_equipamento = request.form["equipamento"]
         ramal = request.form["ramal"]
     
         # Cofirma que os campos não sejam nulos
         if unidade != 'NULL' and tipo_equipamento != 'NULL':
-            # Caso seja uma máquina faz a validação
+
+            # Caso seja uma máquina 
             if tipo_equipamento == 'maquinas':
 
-                sql = (f"SELECT * FROM equipments WHERE hostname LIKE '%{hostname}%' OR ip LIKE '%{ip}%'")
-                result = []
-                cursor.execute(sql)
-                for r in cursor:
-                    result.append(r)
+                    try:
+                        sql = (f"INSERT INTO equipments (ur, ip, hostname, unidade, local, setor, ramal, raspberry) VALUES ('{ur}' ,'{ip}', '{hostname}','{unidade}', '{local}', '{setor}', '{ramal}', 'N');")
+                        cursor.execute(sql)
+                        flash('Máquina cadastrada com sucesso!')
+                        return render_template('public/cadastro_maquina.html', color = 'success')
+                     
+                    except Error as e:
+                        # json_error = {'Error':f' {e}'}
+                        flash(f'Error -  Duplicidade de registro : {e}')
+                        return render_template('public/cadastro_maquina.html', color = 'warning')
 
-                if (len(result) >= 1 and result[0][3] == hostname) or (len(result) >= 1 and result[0][2] == ip):
-                    flash('Esse HOSTNAME ou IP já está sendo usado por outra Máquina!')
-                    # json = {'Status' : 'Já existe um uma máquina ou raspberry com esse hostname'}
-                    # return jsonify(json)
-                    return render_template('public/cadastro_maquina.html', color = 'warning')
-
-                else:
-                    # regra de insert
+            # Caso seja um raspberry
+            elif tipo_equipamento == 'raspberry':
+                
+                try:
+                    sql = (f"INSERT INTO equipments (ip, hostname, unidade, local, setor, ramal, raspberry) VALUES ('{ip}', '{hostname}','{unidade}', '{local}', '{setor}','{ramal}', 'S');")
+                    cursor.execute(sql)
                     flash('Máquina cadastrada com sucesso!')
                     return render_template('public/cadastro_maquina.html', color = 'success')
 
-            # Caso seja um raspberry faz uma validação
-            elif tipo_equipamento == 'raspberry':
-
-                sql = (f"SELECT * FROM raspberry WHERE hostname LIKE '%{hostname}%' OR ip LIKE '%{ip}%'")
-                result = []
-                cursor.execute(sql)
-                for r in cursor:
-                    result.append(r)
-
-                if (len(result) >= 1 and result[0][2] == hostname) or (len(result) >= 1 and result[0][1] == ip):
-                    flash('Esse HOSTNAME ou IP já está sendo usado por outro Raspberry!')
-                    # json = {'Status' : 'Já existe um uma máquina ou raspberry com esse hostname'}
-                    # return jsonify(json)
+                except Error as e:
+                    # json_error = {'Error':f' {e}'}
+                    flash(f'Error -  Duplicidade de registro : {e}')
                     return render_template('public/cadastro_maquina.html', color = 'warning')
 
-                else:
-                    # regra de insert
-                    flash('Raspberry cadastrado com sucesso!')
-                    return render_template('public/cadastro_maquina.html', color = 'success')
+            else:
+                flash('O equipamento não foi cadastrado, verifique se os dados inseridos estão corretos.')
+                return render_template('public/cadastro_maquina.html', color = 'danger')
         else:
             flash("A 'unidade' ou o 'tipo de equipamento' não foi selecionado!")
             return render_template('public/cadastro_maquina.html',color = 'warning')

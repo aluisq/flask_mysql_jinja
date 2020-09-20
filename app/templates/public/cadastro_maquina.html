@@ -4,10 +4,10 @@
 {% block content %}
         <div class="text-center container-fluid">
           <!-- Mensagem de aviso se for excluído um raspberry -->
-          {% with messages = get_flashed_messages() %}
+          {% with messages = get_flashed_messages(with_categories=True) %}
           {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-{{color}}" role="alert">
+            {% for category, message in messages %}
+                <div class="alert alert-{{category}}" role="alert">
                   <h5>{{ message }}</h5>
                 </div>
             {% endfor %}
@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="ip">Ip <span style="color: red;">*</span></label>
-                      <input type="text" class="form-control" name="ip" placeholder="Utilize os pontos para separar os números" required>
+                      <input type="text" class="form-control" name="ip" placeholder="EX: 192.168.XX.XX / 172.31.XX.XX" required>
                     </div>
                   </div>
                   <div class="mb-3">

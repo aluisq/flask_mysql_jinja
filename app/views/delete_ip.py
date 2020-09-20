@@ -19,7 +19,7 @@ def delete_ip_raspberry():
             # json = {'Status':f'MÉTODO POST ATIVO: RASPBERRY EXCLUÍDO: HOSTNAME: {hostname} -> {hospital}'}
             # return jsonify(json)
 
-            flash(f'Raspberry: {hostname} foi deletetado com sucesso!')
+            flash(f'Raspberry: {hostname} foi deletetado com sucesso!', "success")
 
             if unidade == 'HUR 1':
                 return redirect(url_for('ip_rasp_hur1'))
@@ -42,7 +42,7 @@ def delete_ip_raspberry():
 def delete_ip_machine():   
     
     if request.method == 'POST':
-        unidade = str(request.form['name_unidade'])
+        unidade = str(request.form['unidade'])
         hostname = str(request.form['hostname'])
         
         try:
@@ -55,7 +55,7 @@ def delete_ip_machine():
             # json = {'Status':f'MÉTODO POST ATIVO: RASPBERRY EXCLUÍDO: HOSTNAME: {hostname} -> {hospital}'}
             # return jsonify(json)
 
-            flash(f'Raspberry: {hostname} foi deletetado com sucesso!')
+            flash(f'Máquina: {hostname} foi deletetado com sucesso!', "success")
 
             if unidade == 'HUR 1':
                 return redirect(url_for('ip_hur1'))

@@ -5,7 +5,7 @@
 
 <br>
 <div class="container-fluid">
-     <!-- Mensagem de aviso se for excluído um raspberry -->
+     <!-- Mensagem de aviso -->
               {% with messages = get_flashed_messages() %}
                 {% if messages %}
                   {% for message in messages %}
@@ -56,25 +56,34 @@
                                                     <td>{{dado["setor"]}}</td>
                                                     <td>
                                                         <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ip{{dado['id']}}">
+                                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#id{{dado['id']}}">
                                                           Atualizar
                                                         </button>
                                                         
                                                         <!-- Modal -->
-                                                        <div class="modal fade" id="ip{{dado['id']}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal fade" id="id{{dado['id']}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                           <div class="modal-dialog">
                                                             <div class="modal-content">
                                                               <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Hostname: {{dado['hostname']}}</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Atualização | Hostname: {{dado['hostname']}}</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                   <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                               </div>
                                                               <div class="modal-body">
-                                                                <form action="" method="post">
-                                                                  <label for="">Novo IP:</label>
-                                                                  <input type="text" name="">
-                                                                </form>
+                                                                <div class="container-fluid">
+                                                                  <form action="" method="post">
+                                                                    <label for="">Novo IP:</label>
+                                                                    <input type="text" name="" value="{{dado['ip']}}">
+                                                                    <label for="">Novo Local:</label>
+                                                                    <input type="text" name="" value="{{dado['local']}}">
+                                                                    <label for="">Novo Setor:</label>
+                                                                    <input type="text" name="" value="{{dado['setor']}}">
+                                                                    <label for="">Novo Ramal:</label>
+                                                                    <input type="text" name="" value="{{dado['ramal']}}">
+                                                                  </form>
+                                                                </div>
+                                                                
                                                               </div>
                                                               <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

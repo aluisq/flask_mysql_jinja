@@ -4,16 +4,17 @@
 
 <br>
 <div class="container-fluid">
-    <!-- Mensagem de aviso se for excluído um raspberry -->
-    {% with messages = get_flashed_messages() %}
+    <!-- Mensagem de aviso -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
       {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-warning" role="alert">
+        {% for category, message in messages %}
+            <div class="alert alert-{{category}}" role="alert">
               <h5>{{ message }}</h5>
             </div>
         {% endfor %}
       {% endif %}
     {% endwith %}
+    <!-- Mensagem caso a atualização falhe -->
         <div class="card-deck mb-3 text-center">
           <div class="card mb-4 shadow-sm">
             <div class="card-header">
@@ -59,11 +60,11 @@
                                                     <td>{{dado["ramal"]}}</td>
                                                     <td>
                                                         <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ip{{dado['ur']}}">
+                                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#id{{dado['id']}}">
                                                           Atualizar
                                                         </button>
                                                         <!-- Modal -->
-                                                        <div class="modal fade" id="ip{{dado['ur']}}" tabindex="-1" aria-labelledby="ipModalLabel" aria-hidden="true">
+                                                        <div class="modal fade" id="id{{dado['id']}}" tabindex="-1" aria-labelledby="ipModalLabel" aria-hidden="true">
                                                           <div class="modal-dialog">
                                                             <div class="modal-content">
                                                               <div class="modal-header">
@@ -74,36 +75,79 @@
                                                               </div>
                                                               <div class="modal-body">
                                                                 <div class="container-fluid">
-                                                                  <form action="" method="post">
-                                                                    <label for="">UR:</label>
-                                                                    <input type="text" name="" value="{{dado['ur']}}">
-                                                                    <label for="">Novo IP:</label>
-                                                                    <input type="text" name="" value="{{dado['ip']}}">
-                                                                    <label for="">Novo Local:</label>
-                                                                    <input type="text" name="" value="{{dado['local']}}">
-                                                                    <label for="">Novo Setor:</label>
-                                                                    <input type="text" name="" value="{{dado['setor']}}">
-                                                                    <label for="">Novo Ramal:</label>
-                                                                    <input type="text" name="" value="{{dado['ramal']}}">
+                                                                  <form action="{{url_for('update_ip_machine')}}" method="post">
+                                                                    <input type="hidden" class="form-control" name="hostname" value="{{dado['hostname']}}">
+                                                                    <div class="form-group row">
+                                                                      <label for="UR" class="col-sm-2 col-form-label">UR: </label>
+                                                                      <div class="col-sm-4">
+                                                                        <input type="text" class="form-control" name="ur" value="{{dado['ur']}}" >
+                                                                      </div>
+                                                                      <label for="IP" class="col-sm-2 col-form-label">IP: </label>
+                                                                      <div class="col-sm-4">
+                                                                        <input type="text" class="form-control" name="ip" value="{{dado['ip']}}" >
+                                                                      </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                      <label for="UNIDADE" class="col-sm-3 col-form-label">Unidade: </label>
+                                                                      <div class="form-check-inline">
+                                                                        <input class="form-check-input" type="radio" name="unidade" value="HUR 1" id='radioHUR1' required >
+                                                                        <label class="form-check-label" for="radioHUR1">
+                                                                         HUR 1
+                                                                        </label>
+                                                                      </div>
+                                                                      <div class="form-check-inline">
+                                                                        <input class="form-check-input" type="radio" name="unidade" value="ANEXO" id="radioANEXO" required>
+                                                                        <label class="form-check-label" for="radioANEXO">
+                                                                          ANEXO
+                                                                        </label>
+                                                                      </div>
+                                                                      <div class="form-check-inline">
+                                                                        <input class="form-check-input" type="radio" name="unidade" value="HGMI" id="radioHGMI" required>
+                                                                        <label class="form-check-label" for="radioHGMI">
+                                                                          HGMI
+                                                                        </label>
+                                                                      </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                      <label for="LOCAL" class="col-sm-3 col-form-label">Local: </label>
+                                                                      <div class="col-sm-9">
+                                                                        <input type="text" class="form-control" name="local" value="{{dado['local']}}" >
+                                                                      </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                      <label for="SETOR" class="col-sm-3 col-form-label">Setor: </label>
+                                                                      <div class="col-sm-9">
+                                                                        <input type="text" class="form-control" name="setor" value="{{dado['setor']}}" >
+                                                                      </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                      <label for="RAMAL" class="col-sm-3 col-form-label">Ramal: </label>
+                                                                      <div class="col-sm-9">
+                                                                        <input type="text" class="form-control" name="ramal" value="{{dado['ramal']}}" >
+                                                                      </div>
+                                                                     </div>
+                                                                    <div class="modal-footer">
+                                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                                      <button type="submit" class="btn btn-success">Confirmar</button>
+                                                                    </div>
                                                                   </form>
+                                                                  </div>
                                                                 </div>
-                                                                
                                                               </div>
-                                                              <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                                <button type="button" class="btn btn-success">Confirmar</button>
                                                               </div>
-                                                            </div>
-                                                          </div>
                                                         </div>
+
                                                         </td>
+                                                        
                                                         <td>
                                                           <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete{{dado['ur']}}">
+                                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#D{{dado['id']}}">
                                                           Deletar
                                                         </button>
                                                         <!-- Modal -->
-                                                        <div class="modal fade" id="delete{{dado['ur']}}" tabindex="-1" aria-labelledby="ipModalLabel" aria-hidden="true">
+                                                        <div class="modal fade" id="D{{dado['id']}}" tabindex="-1" aria-labelledby="ipModalLabel" aria-hidden="true">
                                                           <div class="modal-dialog">
                                                             <div class="modal-content">
                                                               <div class="modal-header">
@@ -114,15 +158,15 @@
                                                               </div>
                                                               <div class="modal-body">
                                                                 <form action="{{url_for('delete_ip_machine')}}" method="post">
-                                                                  <input type="hidden" name="name_unidade" value="{{unidade}}">
+                                                                  <input type="hidden" name="unidade" value="{{unidade}}">
                                                                   <label for="deleteIp">Hostname:</label>
-                                                                  <input type="text" readonly name="hostname" value="{{dado['hostname']}}" >
-                                                              </div>
-                                                              <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                                <button type="submit" class="btn btn-success">Confirmar</button>
-                                                              </div>
-                                                            </form>
+                                                                  <input type="text" readonly name="hostname" value="{{dado['hostname']}}">
+                                                                    </div>
+                                                                  <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                                    <button type="submit" class="btn btn-success">Confirmar</button>
+                                                                  </div>
+                                                                </form>
                                                               </div>
                                                             </div>
                                                           </div>

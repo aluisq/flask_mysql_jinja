@@ -42,7 +42,7 @@ def new_hostname():
                     sql = (f"INSERT INTO equipments (ip, hostname, unidade, local, setor, ramal, raspberry) VALUES ('{ip}', '{hostname}','{unidade}', '{local}', '{setor}','{ramal}', 'S');")
                     print(sql)
                     cursor.execute(sql)
-                    flash('Raspeberry cadastrado com sucesso!', "success")
+                    flash('Raspberry cadastrado com sucesso!', "success")
                     return render_template('public/cadastro_maquina.html')
 
                 except Error as e:

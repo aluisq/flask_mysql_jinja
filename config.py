@@ -10,11 +10,11 @@ class Config(object):
     # APLICA O BOOTSTRAP LOCAL (SEM NECESSIDADE DE POR CDN DO BOOTSTRAP)
     BOOTSTRAP_SERVE_LOCAL = True
 
-class proConfig(Config):
-     pass
-
-class devConfig(Config):
+class ProConfig(Config):
     pass
 
-class testConfig(Config):
+class DevConfig(Config):
+    pass
+
+class TestConfig(Config):
    pass

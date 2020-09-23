@@ -3,7 +3,7 @@ from mysql.connector import Error
 from flask import render_template, request, redirect, url_for, jsonify, flash
 
 
-@app.route("/update-machine", methods=['POST'])
+@app.route("/update-machine", methods=['POST', 'GET'])
 def update_ip_machine():
     if request.method == 'POST':
 
@@ -53,9 +53,52 @@ def update_ip_machine():
 
     else:
         request.method == 'GET'
-        if unidade == 'HUR 1':
-            return redirect(url_for('ip_hur1'))
-        elif unidade == 'HGMI' :
-            return redirect(url_for('ip_hgmi'))
-        else:
-            return redirect(url_for('ip_anexo_hur1'))
+        return redirect(url_for('index'))
+
+
+@app.route("/update-raspberry", methods=['POST', 'GET'])
+def update_ip_raspberry():
+    if request.method == 'POST':
+
+        ip = request.form['ip'].strip()
+        hostname = request.form['hostname'].upper().strip()
+        unidade = request.form['unidade'].strip()
+        local = request.form['local'].upper().strip()
+        setor = request.form['setor'].upper().strip()
+
+        try:
+            sql = (f"UPDATE equipments SET `ip`='{ip}', `unidade`='{unidade}', `local`='{local}', `setor`='{setor}' WHERE `hostname`='{hostname}' ")
+
+            print(sql)
+
+            cursor.execute(sql)
+
+            # json = {'Status':f'MÉTODO POST ATIVO: RASPBERRY EXCLUÍDO: HOSTNAME: {hostname} -> {hospital}'}
+            # return jsonify(json)
+
+            flash(f'Raspberry: {hostname} foi atualizado com sucesso!', "success")
+
+            if unidade == 'HUR 1':
+                return redirect(url_for('ip_rasp_hur1'))
+            elif unidade == 'HGMI' :
+                return redirect(url_for('ip_rasp_hgmi'))
+            else:
+                unidade == 'ANEXO'
+                return redirect(url_for('ip_rasp_anexo'))
+
+        except Error as e:
+                # json_error = {'Error':f' {e}'}
+                # return jsonify(json_error)
+
+                flash(f'Não foi possível atualizar o Raspberry: {hostname} -  Error : {e}', "warning")
+
+                if unidade == 'HUR 1':
+                    return redirect(url_for('ip_rasp_hur1'))
+                elif unidade == 'HGMI' :
+                    return redirect(url_for('ip_rasp_hgmi'))
+                else:
+                    unidade == 'ANEXO'
+                    return redirect(url_for('ip_rasp_anexo'))
+    else:
+        request.method == 'GET'
+        return redirect(url_for('index'))

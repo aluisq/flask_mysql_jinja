@@ -3,7 +3,6 @@ import os
 # Informo que a classe será um objeto
 
 class Config(object):
-    DEBUG = False
     TESTING = False
     #SEGREDO DA APLICAÇÃO
     SECRET_KEY= os.getenv('SECRET_KEY')
@@ -11,7 +10,7 @@ class Config(object):
     BOOTSTRAP_SERVE_LOCAL = True
 
 class ProConfig(Config):
-    pass
+    pass    
 
 class DevConfig(Config):
     pass

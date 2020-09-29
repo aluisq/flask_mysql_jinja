@@ -1,46 +1,37 @@
 from app import cursor, app
 from mysql.connector import Error
 from flask import render_template, request, redirect, url_for, jsonify, flash
+from flask_login import login_user, logout_user, login_required, current_user
 
 
 @app.route("/update-machine", methods=['POST', 'GET'])
 def update_ip_machine():
-    if request.method == 'POST':
 
-        ur = request.form['ur'].upper().strip()
-        ip = request.form['ip'].strip()
-        hostname = request.form['hostname'].upper().strip()
-        unidade = request.form['unidade'].strip()
-        local = request.form['local'].upper().strip()
-        setor = request.form['setor'].upper().strip()
-        ramal = request.form['ramal'].strip()
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+    else:
+        if request.method == 'POST':
 
-        try:
-            sql = (f"UPDATE equipments SET `ur`='{ur}', `ip`='{ip}', `unidade`='{unidade}', `local`='{local}', `setor`='{setor}', `ramal`='{ramal}' WHERE `hostname`='{hostname}' ")
+            ur = request.form['ur'].upper().strip()
+            ip = request.form['ip'].strip()
+            hostname = request.form['hostname'].upper().strip()
+            unidade = request.form['unidade'].strip()
+            local = request.form['local'].upper().strip()
+            setor = request.form['setor'].upper().strip()
+            ramal = request.form['ramal'].strip()
 
-            print(sql)
+            try:
+                sql = (f"UPDATE equipments SET `ur`='{ur}', `ip`='{ip}', `unidade`='{unidade}', `local`='{local}', `setor`='{setor}', `ramal`='{ramal}' WHERE `hostname`='{hostname}' ")
 
-            cursor.execute(sql)
+                print(sql)
 
-            # json = {'Status':f'MÉTODO POST ATIVO: RASPBERRY EXCLUÍDO: HOSTNAME: {hostname} -> {hospital}'}
-            # return jsonify(json)
+                cursor.execute(sql)
 
-            flash(f'Máquina: {hostname} foi atualizada com sucesso!', "success")
-        
+                # json = {'Status':f'MÉTODO POST ATIVO: RASPBERRY EXCLUÍDO: HOSTNAME: {hostname} -> {hospital}'}
+                # return jsonify(json)
 
-            if unidade == 'HUR 1':
-                return redirect(url_for('ip_hur1'))
-            elif unidade == 'HGMI' :
-                return redirect(url_for('ip_hgmi'))
-            else:
-                unidade == 'ANEXO'
-                return redirect(url_for('ip_anexo_hur1'))
-
-        except Error as e:
-                # json_error = {'Error':f' {e}'}
-                # return jsonify(json_error)
-
-                flash(f'Não foi possível atualizar a máquina: {hostname}! -  Error : {e}', "warning")
+                flash(f'Máquina: {hostname} foi atualizada com sucesso!', "success")
+            
 
                 if unidade == 'HUR 1':
                     return redirect(url_for('ip_hur1'))
@@ -49,56 +40,73 @@ def update_ip_machine():
                 else:
                     unidade == 'ANEXO'
                     return redirect(url_for('ip_anexo_hur1'))
-                
 
-    else:
-        request.method == 'GET'
-        return redirect(url_for('index'))
+            except Error as e:
+                    # json_error = {'Error':f' {e}'}
+                    # return jsonify(json_error)
+
+                    flash(f'Não foi possível atualizar a máquina: {hostname}! -  Error : {e}', "warning")
+
+                    if unidade == 'HUR 1':
+                        return redirect(url_for('ip_hur1'))
+                    elif unidade == 'HGMI' :
+                        return redirect(url_for('ip_hgmi'))
+                    else:
+                        unidade == 'ANEXO'
+                        return redirect(url_for('ip_anexo_hur1'))
+                    
+
+        else:
+            request.method == 'GET'
+            return redirect(url_for('index'))
 
 
 @app.route("/update-raspberry", methods=['POST', 'GET'])
 def update_ip_raspberry():
-    if request.method == 'POST':
+        if not current_user.is_authenticated:
+            return redirect(url_for('login'))
+        else:
+            if request.method == 'POST':
 
-        ip = request.form['ip'].strip()
-        hostname = request.form['hostname'].upper().strip()
-        unidade = request.form['unidade'].strip()
-        local = request.form['local'].upper().strip()
-        setor = request.form['setor'].upper().strip()
+                ip = request.form['ip'].strip()
+                hostname = request.form['hostname'].upper().strip()
+                unidade = request.form['unidade'].strip()
+                local = request.form['local'].upper().strip()
+                setor = request.form['setor'].upper().strip()
 
-        try:
-            sql = (f"UPDATE equipments SET `ip`='{ip}', `unidade`='{unidade}', `local`='{local}', `setor`='{setor}' WHERE `hostname`='{hostname}' ")
+                try:
+                    sql = (f"UPDATE equipments SET `ip`='{ip}', `unidade`='{unidade}', `local`='{local}', `setor`='{setor}' WHERE `hostname`='{hostname}' ")
 
-            print(sql)
+                    print(sql)
 
-            cursor.execute(sql)
+                    cursor.execute(sql)
 
-            # json = {'Status':f'MÉTODO POST ATIVO: RASPBERRY EXCLUÍDO: HOSTNAME: {hostname} -> {hospital}'}
-            # return jsonify(json)
+                    # json = {'Status':f'MÉTODO POST ATIVO: RASPBERRY EXCLUÍDO: HOSTNAME: {hostname} -> {hospital}'}
+                    # return jsonify(json)
 
-            flash(f'Raspberry: {hostname} foi atualizado com sucesso!', "success")
+                    flash(f'Raspberry: {hostname} foi atualizado com sucesso!', "success")
 
-            if unidade == 'HUR 1':
-                return redirect(url_for('ip_rasp_hur1'))
-            elif unidade == 'HGMI' :
-                return redirect(url_for('ip_rasp_hgmi'))
+                    if unidade == 'HUR 1':
+                        return redirect(url_for('ip_rasp_hur1'))
+                    elif unidade == 'HGMI' :
+                        return redirect(url_for('ip_rasp_hgmi'))
+                    else:
+                        unidade == 'ANEXO'
+                        return redirect(url_for('ip_rasp_anexo'))
+
+                except Error as e:
+                        # json_error = {'Error':f' {e}'}
+                        # return jsonify(json_error)
+
+                        flash(f'Não foi possível atualizar o Raspberry: {hostname} -  Error : {e}', "warning")
+
+                        if unidade == 'HUR 1':
+                            return redirect(url_for('ip_rasp_hur1'))
+                        elif unidade == 'HGMI' :
+                            return redirect(url_for('ip_rasp_hgmi'))
+                        else:
+                            unidade == 'ANEXO'
+                            return redirect(url_for('ip_rasp_anexo'))
             else:
-                unidade == 'ANEXO'
-                return redirect(url_for('ip_rasp_anexo'))
-
-        except Error as e:
-                # json_error = {'Error':f' {e}'}
-                # return jsonify(json_error)
-
-                flash(f'Não foi possível atualizar o Raspberry: {hostname} -  Error : {e}', "warning")
-
-                if unidade == 'HUR 1':
-                    return redirect(url_for('ip_rasp_hur1'))
-                elif unidade == 'HGMI' :
-                    return redirect(url_for('ip_rasp_hgmi'))
-                else:
-                    unidade == 'ANEXO'
-                    return redirect(url_for('ip_rasp_anexo'))
-    else:
-        request.method == 'GET'
-        return redirect(url_for('index'))
+                request.method == 'GET'
+                return redirect(url_for('index'))

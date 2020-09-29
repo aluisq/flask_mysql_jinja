@@ -1,0 +1,153 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Mensagem de aviso -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+      {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{category}}" role="alert">
+              <h5>{{ message }}</h5>
+            </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <!-- Mensagem caso a atualização falhe -->
+        <div class="card-deck mb-3 text-center">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+              <h4 class="my-0 font-weight-normal"> Usuários</h4>
+            </div>
+            <div class="card-body">
+
+<table id="userTable" class="table-responsive-xl" style="width:100%">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Sobrenome</th>
+            <th>Login</th>
+            <th>Email</th>
+            <th>Cadastrado</th>
+            <th>Atualizado</th>
+            <th>Editar</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+        <tr>
+          <form action="#">
+              <td>{{user.first_name}}</td>
+              <td>{{user.last_name}}</td>
+              <td>{{user.login}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.created_at}}</td>
+              <td>{{user.updated_at}}</td>
+              <td><button class="btn btn-sl btn-outline-info btn-block" type="submit">Editar</button></td>
+            </form>
+        </tr>
+      {% endfor %}
+    </table>
+    <hr>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#register_user">
+      Cadastrar
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="register_user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Cadastro de Usuário</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <form action="{{url_for('register_user')}}" method="post">
+                <div class="form-group row">
+                  <label for="IP" class="col-sm-4 col-form-label">Nome: </label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="first_name">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="LOCAL" class="col-sm-4 col-form-label">Sobrenome: </label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="last_name">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="LOCAL" class="col-sm-4 col-form-label">Email: </label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="email">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="LOCAL" class="col-sm-4 col-form-label">Login: </label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="login">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="LOCAL" class="col-sm-4 col-form-label">Password: </label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="password">
+                  </div>
+                </div>
+                
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                  <button type="submit" class="btn btn-success">Confirmar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+</div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{{url_for('static',filename='css/datatables.css')}}"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#userTable').DataTable({
+                                "language" : {
+                                                "sProcessing":   "A processar...",
+                                                "sLengthMenu":   "Mostrar _MENU_ registos",
+                                                "sZeroRecords":  "Não foram encontrados resultados",
+                                                "sInfo":         "Resultado(s) _START_ a _END_ de um total de _TOTAL_.",
+                                                "sInfoEmpty":    "Mostrando de 0 até 0 de 0 registos",
+                                                "sInfoFiltered": "(filtrado de _MAX_ registos no total)",
+                                                "sInfoPostFix":  "",
+                                                "sSearch":       "Procurar:",
+                                                "sUrl":          "",
+                                                "oPaginate": {
+                                                    "sFirst":    "Primeiro",
+                                                    "sPrevious": "Anterior",
+                                                    "sNext":     "Seguinte",
+                                                    "sLast":     "Último"
+                                                }
+                                            },
+                                    responsive: true,
+                                // Retirada da visualização da quantidade dos itens por página.
+                                "bLengthChange": false,
+                                // Define o tamanho de registros a serem filtrados, o primeiro é o default, no caso o "5".
+                                "lengthMenu": [5, 10, 25, 50, 75, 100 ]
+                            });
+                        });
+</script>
+
+
+{% endblock %}

@@ -54,6 +54,12 @@
                 </ul>
                 
             </div>
+            <span class="navbar-text">
+                Olá, <span style="color:white;">{{current_user.first_name}} {{current_user.last_name}}</span>! <span style = "letter-spacing:5px;"> | </span>
+            </span>    
+            <span>
+                <a class="btn btn-danger btn-sm rounded-pill" href="{{url_for('logout')}}" role="button"><i class="fa fa-power-off fa-2x" aria-hidden="true"></i></a>
+            </span>
         </nav>
             <div class="container-fluid">
                 <div class="row">
@@ -64,6 +70,12 @@
                                     <i class="fa fa-line-chart fa-2x" aria-hidden="true"></i>
                                     <a class="nav-link" href="{{url_for('dashboard')}}">
                                         <span style="font-size:16px" >Dashboard</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item row edge_distance">
+                                    <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+                                    <a class="nav-link active" href="{{url_for('users')}}">
+                                        <span>Usuários</span>
                                     </a>
                                 </li>
                                 <li class="nav-item row edge_distance">

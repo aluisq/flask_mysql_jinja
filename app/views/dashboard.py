@@ -1,45 +1,48 @@
 from app import cursor, app
 from flask import render_template, request, redirect, url_for
+from flask_login import login_user, logout_user, login_required, current_user
 import pygal
 from pygal.style import LightGreenStyle
 
 
 @app.route("/dashboard")
 def dashboard():
+        if not current_user.is_authenticated:
+            return redirect(url_for('login'))
+        else:
+                ### Query para as Máquinas da aplicação
+                query_machine = ("SELECT COUNT(*) FROM equipments WHERE raspberry LIKE 'N%' ")
 
-        ### Query para as Máquinas da aplicação
-        query_machine = ("SELECT COUNT(*) FROM equipments WHERE raspberry LIKE 'N%' ")
+                cursor.execute(query_machine)
 
-        cursor.execute(query_machine)
+                machine = []
 
-        machine = []
+                ## todo comando execute do cursor ele precisa ser rodado por um for como se fosse um fetch do php ##
 
-        ## todo comando execute do cursor ele precisa ser rodado por um for como se fosse um fetch do php ##
+                for amount_machine in cursor:
+                        machine.append(amount_machine[0])
+                
+                ### Query para os Rasperry da aplicação
 
-        for amount_machine in cursor:
-                machine.append(amount_machine[0])
-        
-        ### Query para os Rasperry da aplicação
+                query_raspberry = ("SELECT COUNT(*) FROM equipments WHERE raspberry LIKE 'S%' ")
 
-        query_raspberry = ("SELECT COUNT(*) FROM equipments WHERE raspberry LIKE 'S%' ")
+                cursor.execute(query_raspberry)
 
-        cursor.execute(query_raspberry)
+                raspberry = []
 
-        raspberry = []
+                for amount_raspberry in cursor:
+                        raspberry.append(amount_raspberry[0])
 
-        for amount_raspberry in cursor:
-                raspberry.append(amount_raspberry[0])
+                ### Dados para o gráfico
 
-        ### Dados para o gráfico
+                graph = pygal.Pie(style=LightGreenStyle)
+                # graph.title = 'Máquinas e Raspberry no Complexo HUR1 / HGMI'
+                graph.x_labels = ['10','30','40','50']
+                graph.add('Máquinas', machine)
+                graph.add('Rasperry', raspberry)
+                graph_data = graph.render_data_uri()
 
-        graph = pygal.Pie(style=LightGreenStyle)
-        # graph.title = 'Máquinas e Raspberry no Complexo HUR1 / HGMI'
-        graph.x_labels = ['10','30','40','50']
-        graph.add('Máquinas', machine)
-        graph.add('Rasperry', raspberry)
-        graph_data = graph.render_data_uri()
-
-        return render_template('public/dashboard.html', graph_data= graph_data)
+                return render_template('public/dashboard.html', graph_data= graph_data)
 
 
 

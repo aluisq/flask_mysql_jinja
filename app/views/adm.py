@@ -36,10 +36,10 @@ def register_user():
 
                     # incrementar página de mensagem de usuário criado
                     flash("Usuário criado com sucesso!")
-                    return redirect(url_for('register_user'), "success")
+                    return redirect(url_for('users'), "success")
                 else:
                     flash("Login/Email já existe", "warning")
-                    return redirect(url_for('register_user'))
+                    return redirect(url_for('users'))
             else:
                 users = User.query.filter().all()
                 return render_template('private/usuarios.html', users = users)
@@ -55,5 +55,9 @@ def register_user():
 
 @app.route('/users')
 def users():
-            users = User.query.filter().all()
-            return render_template('private/usuarios.html', users = users)
+    
+    if not current_user.is_authenticated:
+                return redirect(url_for('login'))
+    else:
+        users = User.query.filter().all()
+        return render_template('private/usuarios.html', users = users)

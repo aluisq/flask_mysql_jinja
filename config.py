@@ -11,7 +11,7 @@ class Config(object):
     BOOTSTRAP_SERVE_LOCAL = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///bigBox.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    PERMANENT_SESSION_LIFETIME =  timedelta(minutes=60)
+    PERMANENT_SESSION_LIFETIME =  timedelta(minutes=1)
     
 class ProConfig(Config):
     pass    

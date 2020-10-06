@@ -56,10 +56,15 @@
                                                     <td>{{dado["setor"]}}</td>
                                                     <td>
                                                         <!-- Button trigger modal -->
+                                                        {% if current_user.admin == True %}
                                                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#id{{dado['id']}}">
                                                           Atualizar
                                                         </button>
-                                                        
+                                                        {% else %}
+                                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="">
+                                                          Atualizar
+                                                        </button>
+                                                        {% endif %}
                                                         <!-- Modal -->
                                                         <div class="modal fade" id="id{{dado['id']}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                           <div class="modal-dialog">
@@ -128,9 +133,15 @@
                                                         </td>
                                                         <td>
                                                           <!-- Button trigger modal -->
+                                                        {% if current_user.admin == True %}
                                                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete{{dado['id']}}">
                                                           Deletar
                                                         </button>
+                                                        {% else %}
+                                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="">
+                                                          Deletar
+                                                        </button>
+                                                        {% endif %}
                                                         <!-- Modal -->
                                                         <div class="modal fade" id="delete{{dado['id']}}" tabindex="-1" aria-labelledby="ipModalLabel" aria-hidden="true">
                                                           <div class="modal-dialog">

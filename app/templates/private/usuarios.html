@@ -48,6 +48,7 @@
       {% endfor %}
     </table>
     <hr>
+    {% if current_user.admin == True %}
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#register_user">
       Cadastrar
@@ -106,6 +107,7 @@
         </div>
       </div>
     </div>
+  {% endif %}
 
 
 </div>

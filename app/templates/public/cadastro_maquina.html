@@ -65,7 +65,9 @@
                       <input type="text" class="form-control" name="ramal">
                     </div>
                   </div>
+                  {% if current_user.admin == True %}
                   <button type="submit" class="btn btn-lg btn-primary">Confirmar</button>
+                  {% endif %}
                 </form>
             </div>
             </div>
